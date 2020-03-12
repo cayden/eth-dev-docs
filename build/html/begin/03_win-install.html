@@ -84,11 +84,22 @@
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">以太坊入门基础篇</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="01_introdutce.html">1. 课程介绍</a></li>
 <li class="toctree-l2"><a class="reference internal" href="02_eth.html">2. 以太坊基础知识</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">3. Windows搭建以太坊</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">3. Windows搭建以太坊</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">3.1. 引言</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">3.2. 环境搭建</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id3">下载可执行文件</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id4">配置语言环境</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#go-ethereum">下载go-ethereum</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">3.3. 初步探索</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="04_mac-install.html">4. Mac平台搭建以太坊</a></li>
 <li class="toctree-l2"><a class="reference internal" href="05_transaction.html">5. 控制台模拟转账</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../solidity/index.html">智能合约开发篇</a></li>
 </ul>
 
             
@@ -157,6 +168,137 @@
             
   <div class="section" id="windows">
 <h1><span class="section-number">3. </span>Windows搭建以太坊<a class="headerlink" href="#windows" title="永久链接至标题">¶</a></h1>
+<div class="section" id="id1">
+<h2><span class="section-number">3.1. </span>引言<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h2>
+<p>Ethereum（以太坊）是一个使开发人员能够建立和发布下一代分布式应用的公共区块链平台。 通过其专用加密货币以太币（Ether）提供去中心化的虚拟机（称为“以太虚拟机”Ethereum Virtual Machine）来处理点对点合约。具体可以访问
+**<a class="reference external" href="https://ethereum.org/">https://ethereum.org/</a> ** 来了解更多相关信息！</p>
+</div>
+<div class="section" id="id2">
+<h2><span class="section-number">3.2. </span>环境搭建<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
+<div class="section" id="id3">
+<h3>下载可执行文件<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h3>
+<p>访问 <a class="reference external" href="https://geth.ethereum.org/downloads/."> https://geth.ethereum.org/downloads/.</a>  出现如图所示</p>
+<div align=center><p><img alt="下载地址" src="../_images/tet001.png" /></p>
+</div><p>点击基于Windows平台，可下载文件 <strong>geth-windows-amd64-1.7.3-4bb3c89d.exe</strong></p>
+<p>然后双击后会生成目录</p>
+<div align=center><p><img alt="下载地址" src="../_images/aHR0cDovL2ltZy5ibG9nLmNzZG4ubmV0LzIwMTgwMjAyMTQ0NDM4NTcz.jfif" /></p>
+</div>
+点击图中的geth.exe即可！</div>
+<div class="section" id="id4">
+<h3>配置语言环境<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h3>
+<p>由于源码是基于go语言开发，需要配置go语言的环境，这里可以通过choco 进行安装，如果没有choco的环境可以通过 访问链接 <strong><a class="reference external" href="https://chocolatey.org"> https://chocolatey.org </a></strong>   进行安装choco. 然后重新打开一个dos窗口执行如下命令</p>
+<blockquote>
+<div><p>C:\Windows\system32&gt; choco install git</p>
+</div></blockquote>
+<blockquote>
+<div><p>C:\Windows\system32&gt; choco install mingw</p>
+</div></blockquote>
+<p>安装完毕后，设置环境变量。</p>
+</div>
+<div class="section" id="go-ethereum">
+<h3>下载go-ethereum<a class="headerlink" href="#go-ethereum" title="永久链接至标题">¶</a></h3>
+<p>在F盘创建一个目录ethereum ，然后通过进入此目录执行</p>
+<blockquote>
+<div><p>git clone https://github.com/ethereum/go-ethereum</p>
+</div></blockquote>
+<blockquote>
+<div><p>cd go-ethereum</p>
+</div></blockquote>
+<blockquote>
+<div><p>go get -u -v golang.org/x/net/context</p>
+</div></blockquote>
+<blockquote>
+<div><p>go install -v ./cmd/...               #编译geth</p>
+</div></blockquote>
+<p>至此环境已经安装完毕，但是需要测试是否可以用！</p>
+</div>
+</div>
+<div class="section" id="id5">
+<h2><span class="section-number">3.3. </span>初步探索<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h2>
+<p>准备创世区块配置文件
+以太坊支持自定义创世区块，要运行私有链，我们就需要定义自己的创世区块，创世区块信息写在一个json格式的配置文件中。首先将下面的内容保存到一个json文件中，例如genesis.json。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;config&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;chainId&quot;</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span>
+        <span class="s2">&quot;homesteadBlock&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">&quot;eip155Block&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">&quot;eip158Block&quot;</span><span class="p">:</span> <span class="mi">0</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;coinbase&quot;</span> <span class="p">:</span> <span class="s2">&quot;0x0000000000000000000000000000000000000000&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;difficulty&quot;</span> <span class="p">:</span> <span class="s2">&quot;0x40000&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;extraData&quot;</span> <span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;gasLimit&quot;</span> <span class="p">:</span> <span class="s2">&quot;0xffffffff&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;nonce&quot;</span> <span class="p">:</span> <span class="s2">&quot;0x0000000000000042&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;mixhash&quot;</span> <span class="p">:</span> <span class="s2">&quot;0x0000000000000000000000000000000000000000000000000000000000000000&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;parentHash&quot;</span> <span class="p">:</span> <span class="s2">&quot;0x0000000000000000000000000000000000000000000000000000000000000000&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;timestamp&quot;</span> <span class="p">:</span> <span class="s2">&quot;0x00&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;alloc&quot;</span><span class="p">:</span> <span class="p">{</span> <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>cmd进入上面创建的目录,然后执行指令</p>
+<blockquote>
+<div><p>geth --datadir data init genesis.json</p>
+</div></blockquote>
+<p>上面的命令的主体是geth init，表示初始化区块链，命令可以带有选项和参数，其中--datadir选项后面跟一个目录名，这里为data，表示指定数据存放目录为data，genesis.json是init命令的参数。运行上面的命令，会读取genesis.json文件，根据其中的内容，将创世区块写入到区块链中。</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>E:<span class="se">\e</span>th&gt;geth -datadir data init genesis.json
+INFO <span class="o">[</span><span class="m">01</span>-20<span class="p">|</span><span class="m">10</span>:27:57<span class="o">]</span> Maximum peer count                       <span class="nv">ETH</span><span class="o">=</span><span class="m">25</span> <span class="nv">LES</span><span class="o">=</span><span class="m">0</span> <span class="nv">total</span><span class="o">=</span><span class="m">25</span>
+INFO <span class="o">[</span><span class="m">01</span>-20<span class="p">|</span><span class="m">10</span>:27:57<span class="o">]</span> Allocated cache and file handles         <span class="nv">database</span><span class="o">=</span>E:<span class="se">\\</span>eth<span class="se">\\</span>data<span class="se">\\</span>geth<span class="se">\\</span>chaindata <span class="nv">cache</span><span class="o">=</span><span class="m">16</span> <span class="nv">handles</span><span class="o">=</span><span class="m">16</span>
+INFO <span class="o">[</span><span class="m">01</span>-20<span class="p">|</span><span class="m">10</span>:27:57<span class="o">]</span> Writing custom genesis block
+INFO <span class="o">[</span><span class="m">01</span>-20<span class="p">|</span><span class="m">10</span>:27:57<span class="o">]</span> Persisted trie from memory database      <span class="nv">nodes</span><span class="o">=</span><span class="m">0</span> <span class="nv">size</span><span class="o">=</span><span class="m">0</span>.00B <span class="nv">time</span><span class="o">=</span>0s <span class="nv">gcnodes</span><span class="o">=</span><span class="m">0</span> <span class="nv">gcsize</span><span class="o">=</span><span class="m">0</span>.00B <span class="nv">gctime</span><span class="o">=</span>0s <span class="nv">livenodes</span><span class="o">=</span><span class="m">1</span> <span class="nv">livesize</span><span class="o">=</span><span class="m">0</span>.00B
+INFO <span class="o">[</span><span class="m">01</span>-20<span class="p">|</span><span class="m">10</span>:27:57<span class="o">]</span> Successfully wrote genesis state         <span class="nv">database</span><span class="o">=</span>chaindata                      <span class="nv">hash</span><span class="o">=</span>b240e0…e37e4e
+INFO <span class="o">[</span><span class="m">01</span>-20<span class="p">|</span><span class="m">10</span>:27:57<span class="o">]</span> Allocated cache and file handles         <span class="nv">database</span><span class="o">=</span>E:<span class="se">\\</span>eth<span class="se">\\</span>data<span class="se">\\</span>geth<span class="se">\\</span>lightchaindata <span class="nv">cache</span><span class="o">=</span><span class="m">16</span> <span class="nv">handles</span><span class="o">=</span><span class="m">16</span>
+INFO <span class="o">[</span><span class="m">01</span>-20<span class="p">|</span><span class="m">10</span>:27:57<span class="o">]</span> Writing custom genesis block
+INFO <span class="o">[</span><span class="m">01</span>-20<span class="p">|</span><span class="m">10</span>:27:57<span class="o">]</span> Persisted trie from memory database      <span class="nv">nodes</span><span class="o">=</span><span class="m">0</span> <span class="nv">size</span><span class="o">=</span><span class="m">0</span>.00B <span class="nv">time</span><span class="o">=</span>0s <span class="nv">gcnodes</span><span class="o">=</span><span class="m">0</span> <span class="nv">gcsize</span><span class="o">=</span><span class="m">0</span>.00B <span class="nv">gctime</span><span class="o">=</span>0s <span class="nv">livenodes</span><span class="o">=</span><span class="m">1</span> <span class="nv">livesize</span><span class="o">=</span><span class="m">0</span>.00B
+INFO <span class="o">[</span><span class="m">01</span>-20<span class="p">|</span><span class="m">10</span>:27:57<span class="o">]</span> Successfully wrote genesis state         <span class="nv">database</span><span class="o">=</span>lightchaindata                      <span class="nv">hash</span><span class="o">=</span>b240e0 …e37e4e
+
+E:<span class="se">\e</span>th&gt;
+</pre></div>
+</div>
+<p><strong>启动私有链节点</strong></p>
+<blockquote>
+<div><p>geth --datadir &quot;./&quot; --nodiscover console 2&gt;&gt;geth.log</p>
+</div></blockquote>
+<div align=center><p><img alt="下载地址" src="../_images/aHR0cDovL2ltZy5ibG9nLmNzZG4ubmV0LzIwMTgwMjAyMTQ1NzQ3NTEw.jfif" /></p>
+</div><p>然后执行如下可以挖坑、交易等操作！</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">eth</span><span class="o">.</span><span class="n">accounts</span>
+<span class="p">[]</span>
+<span class="o">&gt;</span> <span class="n">personal</span><span class="o">.</span><span class="n">newAccount</span><span class="p">(</span><span class="s2">&quot;123456&quot;</span><span class="p">)</span>
+<span class="s2">&quot;0xacc9150f4d8c5664bd98a51c3aca63f5b5938fd5&quot;</span>
+<span class="o">&gt;</span> <span class="n">eth</span><span class="o">.</span><span class="n">accounts</span>
+<span class="p">[</span><span class="s2">&quot;0xacc9150f4d8c5664bd98a51c3aca63f5b5938fd5&quot;</span><span class="p">]</span>
+<span class="o">&gt;</span> <span class="n">miner</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+<span class="n">null</span>
+<span class="o">&gt;</span> <span class="n">miner</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+<span class="n">true</span>
+<span class="o">&gt;</span> <span class="n">eth</span><span class="o">.</span><span class="n">accounts</span>
+<span class="p">[</span><span class="s2">&quot;0xacc9150f4d8c5664bd98a51c3aca63f5b5938fd5&quot;</span><span class="p">]</span>
+<span class="o">&gt;</span> <span class="n">eth</span><span class="o">.</span><span class="n">blockNumber</span>
+<span class="mi">0</span>
+<span class="o">&gt;</span> <span class="n">personal</span><span class="o">.</span><span class="n">newAccount</span><span class="p">(</span><span class="s2">&quot;12345&quot;</span><span class="p">)</span>
+<span class="s2">&quot;0xa6b519c11b19fd73d08262a8e964ccda3509c015&quot;</span>
+<span class="o">&gt;</span> <span class="n">user1</span><span class="o">=</span><span class="n">eth</span><span class="o">.</span><span class="n">accounts</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="s2">&quot;0xacc9150f4d8c5664bd98a51c3aca63f5b5938fd5&quot;</span>
+<span class="o">&gt;</span> <span class="n">user2</span><span class="o">=</span><span class="n">eth</span><span class="o">.</span><span class="n">accounts</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="s2">&quot;0xa6b519c11b19fd73d08262a8e964ccda3509c015&quot;</span>
+<span class="o">&gt;</span> <span class="n">eth</span><span class="o">.</span><span class="n">getBalance</span><span class="p">(</span><span class="n">user1</span><span class="p">)</span>
+<span class="mi">0</span>
+<span class="o">&gt;</span> <span class="n">eth</span><span class="o">.</span><span class="n">getBalance</span><span class="p">(</span><span class="n">user2</span><span class="p">)</span>
+<span class="mi">0</span>
+<span class="o">&gt;</span> <span class="n">miner</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+<span class="n">null</span>
+<span class="o">&gt;</span> <span class="n">miner</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+<span class="n">true</span>
+<span class="o">&gt;</span> <span class="n">eth</span><span class="o">.</span><span class="n">coinbase</span>
+<span class="s2">&quot;0xacc9150f4d8c5664bd98a51c3aca63f5b5938fd5&quot;</span>
+<span class="o">&gt;</span> <span class="n">miner</span><span class="o">.</span><span class="n">setEtherbase</span><span class="p">(</span><span class="n">user1</span><span class="p">)</span>
+<span class="n">true</span>
+<span class="o">&gt;</span> <span class="n">eth</span><span class="o">.</span><span class="n">coinbase</span>
+<span class="s2">&quot;0xacc9150f4d8c5664bd98a51c3aca63f5b5938fd5&quot;</span>
+<span class="o">&gt;</span> <span class="n">eth</span><span class="o">.</span><span class="n">getBalance</span><span class="p">(</span><span class="n">user1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
 </div>
 
 

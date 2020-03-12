@@ -1,0 +1,268 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="zh" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="zh" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>2. 智能合约部署和使用 &mdash; eth-dev-docs v1.0 文档</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="prev" title="1. Remix开发智能合约" href="01_dev.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> eth-dev-docs
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../begin/index.html">以太坊入门基础篇</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">智能合约开发篇</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="01_dev.html">1. Remix开发智能合约</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">2. 智能合约部署和使用</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id2">2.1. 介绍</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">2.2. 创建合约</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">2.3. 部署合约</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">eth-dev-docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">智能合约开发篇</a> &raquo;</li>
+        
+      <li><span class="section-number">2. </span>智能合约部署和使用</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/solidity/02_deploy.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="id1">
+<h1><span class="section-number">2. </span>智能合约部署和使用<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
+<div class="section" id="id2">
+<h2><span class="section-number">2.1. </span>介绍<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
+<p>Remix是以太坊提供的一个开发Solidity智能合约的网络版开发软件。合约的开发者在Remix里提供的JavaScript虚拟机上开发，调试好合约后，可以发布到以太坊，或者任何支持Solidity智能合约的区块链上。</p>
+</div>
+<div class="section" id="id3">
+<h2><span class="section-number">2.2. </span>创建合约<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
+<p>首先在<a class="reference external" href="http://remix.ethereum.org">Remix</a> 新建一个Message.sol</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pragma</span> <span class="n">solidity</span><span class="o">^</span><span class="mf">0.4</span><span class="o">.</span><span class="mi">20</span><span class="p">;</span>
+<span class="n">contract</span> <span class="n">Message</span><span class="p">{</span>
+    <span class="n">string</span> <span class="n">msg</span><span class="p">;</span>
+    <span class="n">function</span> <span class="n">setMsg</span><span class="p">(</span><span class="n">string</span> <span class="n">_msg</span><span class="p">)</span> <span class="n">public</span> <span class="p">{</span>
+        <span class="n">msg</span><span class="o">=</span><span class="n">_msg</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">function</span> <span class="n">getMsg</span><span class="p">()</span> <span class="n">public</span> <span class="n">view</span> <span class="n">returns</span><span class="p">(</span><span class="n">string</span><span class="p">){</span>
+        <span class="k">return</span> <span class="n">msg</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div align=center><p><img alt="Message.sol" src="../_images/20180713123314487.png" /></p>
+</div></div>
+<div class="section" id="id4">
+<h2><span class="section-number">2.3. </span>部署合约<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h2>
+<div align=center><p><img alt="Message.sol" src="../_images/5e13198a55e0b.png" /></p>
+</div><p>然后进入此前创建的私有链目录</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>cuiran@cuiran:~/ethereum$     cd data0/
+cuiran@cuiran:~/ethereum/data0$     ls
+geth     history  keystore log.txt
+cuiran@cuiran:~/ethereum/data0$     geth --datadir . --networkid 4224 --rpc --rpcport 8545 --port 30303 --rpccorsdomain=&quot;*&quot; -rpcapi eth,web3,personal,net console 2&gt; log.txt
+Welcome to the Geth JavaScript console!
+
+instance: Geth/v1.7.3-stable/darwin-amd64/go1.9.3
+coinbase: 0xb258e5b1b30215b112881c13f22ab5a47a624b81
+at block: 79 (Mon, 09 Jul 2018 16:20:57 CST)
+ datadir: /Users/cuiran/ethereum/data0
+ modules: admin:1.0 debug:1.0 eth:1.0 miner:1.0 net:1.0 personal:1.0 rpc:1.0 txpool:1.0 web3:1.0
+
+&gt; eth.accounts
+[&quot;0xb258e5b1b30215b112881c13f22ab5a47a624b81&quot;, &quot;0xf417953e3b736a68cf7c60f89f459a28d25880da&quot;]
+&gt; personal.unlockAccount(&quot;0xb258e5b1b30215b112881c13f22ab5a47a624b81&quot;);//解锁账号
+Unlock account 0xb258e5b1b30215b112881c13f22ab5a47a624b81
+Passphrase:
+&gt; eth.sendTransaction({from :user1,to:user2,value:web3.toWei(3,&quot;ether&quot;)})
+&quot;0x92251d069cf4e6f740c5315003819bb021e533e39bcd563eae8cb091363a4e26&quot;
+&gt; miner.start();//开始共识
+null
+&gt; miner.stop();
+true
+&gt;
+</pre></div>
+</div>
+<p>然后在remix里面deploy发布
+就会出现</p>
+<div align=center><p><img alt="测试" src="../_images/20180713124057754.png" /></p>
+</div><p>在setMsg里面输入 &quot;hello world&quot;
+点击getMsg会返回 hello world</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="01_dev.html" class="btn btn-neutral float-left" title="1. Remix开发智能合约" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, cayden
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

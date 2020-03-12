@@ -85,10 +85,19 @@
 <li class="toctree-l2"><a class="reference internal" href="01_introdutce.html">1. 课程介绍</a></li>
 <li class="toctree-l2"><a class="reference internal" href="02_eth.html">2. 以太坊基础知识</a></li>
 <li class="toctree-l2"><a class="reference internal" href="03_win-install.html">3. Windows搭建以太坊</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">4. Mac平台搭建以太坊</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">4. Mac平台搭建以太坊</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">4.1. 软件安装与配置</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">4.2. 编译安装</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">4.3. 创世区块</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">4.4. 初始化创世区块</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">4.5. 启动节点</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#geth">4.6. Geth命令测试</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="05_transaction.html">5. 控制台模拟转账</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../solidity/index.html">智能合约开发篇</a></li>
 </ul>
 
             
@@ -157,6 +166,276 @@
             
   <div class="section" id="mac">
 <h1><span class="section-number">4. </span>Mac平台搭建以太坊<a class="headerlink" href="#mac" title="永久链接至标题">¶</a></h1>
+<div class="section" id="id1">
+<h2><span class="section-number">4.1. </span>软件安装与配置<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h2>
+<p>在命令终端执行</p>
+<blockquote>
+<div><p>brew tap ethereum/ethereum</p>
+</div></blockquote>
+<blockquote>
+<div><p>brew install ethereum</p>
+</div></blockquote>
+<p>执行第二个命令时间会稍微长一点，耐心等待即可</p>
+</div>
+<div class="section" id="id2">
+<h2><span class="section-number">4.2. </span>编译安装<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
+<blockquote>
+<div><p>git clone https://github.com/ethereum/go-ethereum</p>
+</div></blockquote>
+<blockquote>
+<div><p>sudo apt-get install -y build-essential golang</p>
+</div></blockquote>
+<blockquote>
+<div><p>cd go-ethereum</p>
+</div></blockquote>
+<blockquote>
+<div><p>make geth</p>
+</div></blockquote>
+</div>
+<div class="section" id="id3">
+<h2><span class="section-number">4.3. </span>创世区块<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
+<blockquote>
+<div><p>cd ~</p>
+</div></blockquote>
+<blockquote>
+<div><p>mkdir -p ethereum</p>
+</div></blockquote>
+<blockquote>
+<div><p>cd ethereum</p>
+</div></blockquote>
+</div>
+<div class="section" id="id4">
+<h2><span class="section-number">4.4. </span>初始化创世区块<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h2>
+<p>在目录ethereum目录下创建文件 genesis.json
+文件内容为：</p>
+<blockquote>
+<div><p>{
+&quot;nonce&quot;: &quot;0x0000000000000042&quot;,
+&quot;difficulty&quot;: &quot;0x020000&quot;,
+&quot;mixhash&quot;: &quot;0x0000000000000000000000000000000000000000000000000000000000000000&quot;,
+&quot;coinbase&quot;: &quot;0x0000000000000000000000000000000000000000&quot;,
+&quot;timestamp&quot;: &quot;0x00&quot;,
+&quot;parentHash&quot;: &quot;0x0000000000000000000000000000000000000000000000000000000000000000&quot;,
+&quot;extraData&quot;: &quot;0x11bbe8db4e347b4e8c937c1c8370e4b5ed33adb3db69cbdb7a38e1e50b1b82fa&quot;,
+&quot;gasLimit&quot;: &quot;0x4c4b40&quot;,
+&quot;config&quot;: {
+&quot;chainId&quot;: 15,
+&quot;homesteadBlock&quot;: 0,
+&quot;eip155Block&quot;: 0,
+&quot;eip158Block&quot;: 0
+},
+&quot;alloc&quot;: { }
+}</p>
+</div></blockquote>
+<p>下面对上面参数进行解释</p>
+<blockquote>
+<div><p>mixhash: 与nonce配合用于挖矿，由上一个区块的一部分生成的hash。注意他和nonce的设置需要满足以太坊的Yellow paper, 4.3.4. Block Header Validity, (44)章节所描述的条件。.
+nonce: nonce就是一个64位随机数，用于挖矿，注意他和mixhash的设置需要满足以太坊的Yellow paper, 4.3.4. Block Header Validity, (44)章节所描述的条件。</p>
+</div></blockquote>
+<blockquote>
+<div><p>difficulty: 设置当前区块的难度，如果难度过大，cpu挖矿就很难，这里设置较小难度</p>
+</div></blockquote>
+<blockquote>
+<div><p>alloc: 用来预置账号以及账号的以太币数量，因为私有链挖矿比较容易，所以我们不需要预置有币的账号，需要的时候自己创建即可以。</p>
+</div></blockquote>
+<blockquote>
+<div><p>coinbase: 矿工的账号，随便填</p>
+</div></blockquote>
+<blockquote>
+<div><p>timestamp: 设置创世块的时间戳</p>
+</div></blockquote>
+<blockquote>
+<div><p>parentHash: 上一个区块的hash值，因为是创世块，所以这个值是0</p>
+</div></blockquote>
+<blockquote>
+<div><p>extraData: 附加信息，随便填，可以填你的个性信息</p>
+</div></blockquote>
+<blockquote>
+<div><p>gasLimit: 该值设置对GAS的消耗总量限制，用来限制区块能包含的交易信息总和，因为我们是私有链，所以填最大。</p>
+</div></blockquote>
+<p>在终端操作如图所示：</p>
+<div align=center><p><img alt="下载地址" src="../_images/aHR0cDovL2ltZy5ibG9nLmNzZG4ubmV0LzIwMTgwMjAyMjEyNDM3OTc4.jfif" /></p>
+</div><div align=center><p><img alt="下载地址" src="../_images/aHR0cDovL2ltZy5ibG9nLmNzZG4ubmV0LzIwMTgwMjAyMjEyNDUwNjkz.jfif" /></p>
+</div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span>cuiran@cuiran:~/ethereum$     geth --datadir data init genesis.json
+WARN [02-02|07:03:18] No etherbase set and no accounts found as default
+INFO [02-02|07:03:18] Allocated cache and file handles         database=/Users/cuiran/ethereum/data/geth/chaindata cache=16 handles=16
+INFO [02-02|07:03:18] Writing custom genesis block
+INFO [02-02|07:03:18] Successfully wrote genesis state         database=chaindata                                  hash=611596…424d04
+INFO [02-02|07:03:18] Allocated cache and file handles         database=/Users/cuiran/ethereum/data/geth/lightchaindata cache=16 handles=16
+INFO [02-02|07:03:18] Writing custom genesis block
+INFO [02-02|07:03:18] Successfully wrote genesis state         database=lightchaindata                                  hash=611596…424d04
+cuiran@cuiran:~/ethereum$     find data
+data
+data/geth
+data/geth/.DS_Store
+data/geth/chaindata
+data/geth/chaindata/000001.log
+data/geth/chaindata/CURRENT
+data/geth/chaindata/LOCK
+data/geth/chaindata/LOG
+data/geth/chaindata/MANIFEST-000000
+data/geth/lightchaindata
+data/geth/lightchaindata/000001.log
+data/geth/lightchaindata/CURRENT
+data/geth/lightchaindata/LOCK
+data/geth/lightchaindata/LOG
+data/geth/lightchaindata/MANIFEST-000000
+data/keystore
+</pre></div>
+</div>
+</div>
+<div class="section" id="id5">
+<h2><span class="section-number">4.5. </span>启动节点<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h2>
+<blockquote>
+<div><p>geth --dev console 2&gt;&gt; geth-log</p>
+</div></blockquote>
+<p>重新打开一个窗口执行下面命令可以查看日志</p>
+<blockquote>
+<div><p>tail -f geth-log</p>
+</div></blockquote>
+</div>
+<div class="section" id="geth">
+<h2><span class="section-number">4.6. </span>Geth命令测试<a class="headerlink" href="#geth" title="永久链接至标题">¶</a></h2>
+<p>用户命令测试</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#返回钱包管理的账户地址列表  </span>
+<span class="c1">#返回示例：[&quot;0x3138e3722fb4280cb67f6e858108136bfa1c9160&quot;]</span>
+<span class="n">eth</span><span class="o">.</span><span class="n">accounts</span>
+
+<span class="c1">#创建账户地址，参数为账户锁定密码，在转账前需要先解锁账户</span>
+<span class="c1">#我们把这个命令运行两次，创建两个地址，加上默认的，一共有了三个账户地址</span>
+<span class="n">personal</span><span class="o">.</span><span class="n">newAccount</span><span class="p">(</span><span class="s1">&#39;111111&#39;</span><span class="p">)</span>
+<span class="n">personal</span><span class="o">.</span><span class="n">newAccount</span><span class="p">(</span><span class="s1">&#39;111111&#39;</span><span class="p">)</span>
+
+<span class="c1">#为账户设置别名，方便命令输入</span>
+<span class="n">user1</span><span class="o">=</span><span class="n">eth</span><span class="o">.</span><span class="n">accounts</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">user2</span><span class="o">=</span><span class="n">eth</span><span class="o">.</span><span class="n">accounts</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="c1">#查看地址user1余额,这个地址是测试链默认开通的一个地址，里面初始化有很多币</span>
+<span class="c1">#我们创建的另外两个地址余额未0</span>
+<span class="n">eth</span><span class="o">.</span><span class="n">getBalance</span><span class="p">(</span><span class="n">user1</span><span class="p">)</span>
+
+<span class="c1">#查看区块高度，现在为0</span>
+<span class="n">eth</span><span class="o">.</span><span class="n">blockNumber</span>
+
+<span class="c1">#转账测试，首先解锁账号user1</span>
+<span class="c1">#命令运行后要求输入解锁密码，直接回车，默认账号锁定密码为空，返回true成功</span>
+<span class="n">personal</span><span class="o">.</span><span class="n">unlockAccount</span><span class="p">(</span><span class="n">user1</span><span class="p">)</span>
+
+<span class="c1">#从user1向user2转账3个以太币</span>
+<span class="c1">#命令运行后，提交交易立马回出发挖矿</span>
+<span class="n">eth</span><span class="o">.</span><span class="n">sendTransaction</span><span class="p">({</span><span class="n">from</span><span class="p">:</span><span class="n">user1</span><span class="p">,</span><span class="n">to</span><span class="p">:</span><span class="n">user2</span><span class="p">,</span><span class="n">value</span><span class="p">:</span><span class="n">web3</span><span class="o">.</span><span class="n">toWei</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="s2">&quot;ether&quot;</span><span class="p">)})</span>
+
+<span class="c1">#查看区块高度，这时高度为1</span>
+<span class="n">eth</span><span class="o">.</span><span class="n">blockNumber</span>
+<span class="c1">#挖矿测试</span>
+<span class="c1">#geth启动后，自动启动挖矿，这时运行miner.start()，返回为null 无交易的时候#不挖矿，当有交易时自动会触发挖矿流程</span>
+
+<span class="c1">#我们可以先停止挖矿</span>
+<span class="n">miner</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+
+<span class="c1">#提交交易，这时候只提交，查看账户余额，但是未确认</span>
+<span class="n">eth</span><span class="o">.</span><span class="n">sendTransaction</span><span class="p">({</span><span class="n">from</span><span class="p">:</span><span class="n">user1</span><span class="p">,</span><span class="n">to</span><span class="p">:</span><span class="n">user2</span><span class="p">,</span><span class="n">value</span><span class="p">:</span><span class="n">web3</span><span class="o">.</span><span class="n">toWei</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="s2">&quot;ether&quot;</span><span class="p">)})</span>
+
+<span class="c1">#启动挖矿，确认交易，再次查看账户余额</span>
+<span class="n">miner</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+
+<span class="c1">#那么挖矿奖励去哪儿了？查看矿工地址</span>
+<span class="n">eth</span><span class="o">.</span><span class="n">coinbase</span>
+
+<span class="c1">#设置矿工地址</span>
+<span class="n">miner</span><span class="o">.</span><span class="n">setEtherbase</span><span class="p">(</span><span class="n">eth</span><span class="o">.</span><span class="n">coinbase</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>cuiran@cuiran:~/ethereum$     geth --dev console 2&gt;&gt; geth-log
+Welcome to the Geth JavaScript console!
+
+instance: Geth/v1.7.3-stable/darwin-amd64/go1.9.3
+coinbase: 0xdfa0120507a5d38a9d5f82d2447e635ac3db66a9
+at block: 0 (Thu, 01 Jan 1970 08:00:00 CST)
+ datadir:
+ modules: admin:1.0 clique:1.0 debug:1.0 eth:1.0 miner:1.0 net:1.0 personal:1.0 rpc:1.0 shh:1.0 txpool:1.0 web3:1.0
+
+&gt; eth.accounts
+[&quot;0xdfa0120507a5d38a9d5f82d2447e635ac3db66a9&quot;]
+&gt; personal.newAccount(&#39;123456&#39;)
+&quot;0x3b9dfdcc0ab06ecb94ee5997346b5b5d5648625b&quot;
+&gt; eth.accounts
+[&quot;0xdfa0120507a5d38a9d5f82d2447e635ac3db66a9&quot;, &quot;0x3b9dfdcc0ab06ecb94ee5997346b5b5d5648625b&quot;]
+&gt; user1
+ReferenceError: &#39;user1&#39; is not defined
+    at &lt;anonymous&gt;:1:1
+
+&gt; user1=eth.accounts[0]
+&quot;0xdfa0120507a5d38a9d5f82d2447e635ac3db66a9&quot;
+&gt; user2=eth.accounts[1]
+&quot;0x3b9dfdcc0ab06ecb94ee5997346b5b5d5648625b&quot;
+&gt; user1
+&quot;0xdfa0120507a5d38a9d5f82d2447e635ac3db66a9&quot;
+&gt; user2
+&quot;0x3b9dfdcc0ab06ecb94ee5997346b5b5d5648625b&quot;
+&gt; personal.unlockAccount(user2,&#39;123456&#39;)
+true
+&gt; eth.getBalance(user1)
+1.15792089237316195423570985008687907853269984665640564039457584007913129639927e+77
+&gt; eth.getBalance(user2)
+0
+&gt; miner
+{
+  getHashrate: function(),
+  setEtherbase: function(),
+  setExtra: function(),
+  setGasPrice: function(),
+  start: function(),
+  stop: function()
+}
+&gt; miner.start()
+null
+&gt; miner.stop()
+true
+&gt; eth.getBalance(user1)
+1.15792089237316195423570985008687907853269984665640564039457584007913129639927e+77
+&gt; eth.sendTransaction({from:user1,to:user2,value:8})
+&quot;0x37fd82a8f3f783599fb64f7f860b834a65ebae347968a454140b8ff37a652732&quot;
+&gt; eth.getBalance(user2)
+0
+&gt; miner.start()
+null
+&gt; miner.stop()
+true
+&gt; miner.stop()
+true
+&gt; eth.sendTransaction({from:user1,to:user2,value:8})
+&quot;0x64ed9fcaa87ac331526d7f41f281515c90c5c261de37b7dd982d02639b42e40c&quot;
+&gt; miner.start()
+null
+&gt; eth.coinbase
+&quot;0xdfa0120507a5d38a9d5f82d2447e635ac3db66a9&quot;
+&gt; miner.setE
+miner.setEtherbase miner.setExtra
+&gt; miner.setEtherbase(eth.coinbase)
+true
+&gt; miner.stop()
+true
+&gt; eth.getBalance(user2)
+16
+&gt; eth.blockNumber
+2
+&gt; eth.sendTransaction({from:user1,to:user2,value:9})
+&quot;0x7d9d5792b99eedd662d3629f3cb792b15313c61e145bf8c50c9f7728b6b42757&quot;
+&gt; eth.blockNumber
+2
+&gt; eth.getBalance(user2)
+16
+&gt; miner.start()
+null
+&gt; miner.stop()
+true
+&gt; eth.getBalance(user2)
+25
+&gt;
+</pre></div>
+</div>
+</div>
 </div>
 
 

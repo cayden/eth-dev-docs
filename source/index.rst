@@ -3,14 +3,17 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to eth-dev-docs's documentation!
-========================================
+   以太坊DApp开发实战
+   ====================================
+   .. note::
 
-.. toctree::
-   :maxdepth: 2
-   :glob:
+       这里是以太坊DApp开发实战相关教程，欢迎交流与指教。
 
+   目录:
+   ^^^^^
 
+   .. toctree::
+       :maxdepth: 2
+       :glob:
 
-
-  begin/index
+       begin/index

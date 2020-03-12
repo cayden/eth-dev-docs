@@ -18,6 +18,10 @@
 # -- Project information -----------------------------------------------------
 import sphinx_rtd_theme
 from recommonmark.parser import CommonMarkParser
+
+# The master toctree document.
+master_doc = 'index'
+
 project = 'eth-dev-docs'
 copyright = '2020, cayden'
 author = 'cayden'

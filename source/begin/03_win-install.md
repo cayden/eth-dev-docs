@@ -2,7 +2,7 @@ Windows搭建以太坊
 ==================
 ### 引言
 Ethereum（以太坊）是一个使开发人员能够建立和发布下一代分布式应用的公共区块链平台。 通过其专用加密货币以太币（Ether）提供去中心化的虚拟机（称为“以太虚拟机”Ethereum Virtual Machine）来处理点对点合约。具体可以访问
-**[https://ethereum.org/](https://ethereum.org/) ** 来了解更多相关信息！
+[https://ethereum.org/](https://ethereum.org/)  来了解更多相关信息！
 
 ### 环境搭建
 ##### 下载可执行文件

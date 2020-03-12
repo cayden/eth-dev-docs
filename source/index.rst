@@ -8,13 +8,9 @@ Welcome to eth-dev-docs's documentation!
 
 .. toctree::
    :maxdepth: 2
-   :glob: 
+   :glob:
 
 
 
-Indices and tables
-==================
 
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+  begin/index

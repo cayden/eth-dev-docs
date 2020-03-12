@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>5. 控制台模拟转账 &mdash; eth-dev-docs v1.0 文档</title>
+  <title>1. 环境搭建 &mdash; eth-dev-docs v1.0 文档</title>
   
 
   
@@ -35,8 +35,8 @@
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="搜索" href="../search.html" />
-    <link rel="next" title="智能合约开发篇" href="../solidity/index.html" />
-    <link rel="prev" title="4. Mac平台搭建以太坊" href="04_mac-install.html" /> 
+    <link rel="next" title="2. 添加账户" href="02_account.html" />
+    <link rel="prev" title="Web3.js开发篇" href="index.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -81,17 +81,19 @@
             
             
               <ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">以太坊入门基础篇</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="01_introdutce.html">1. 课程介绍</a></li>
-<li class="toctree-l2"><a class="reference internal" href="02_eth.html">2. 以太坊基础知识</a></li>
-<li class="toctree-l2"><a class="reference internal" href="03_win-install.html">3. Windows搭建以太坊</a></li>
-<li class="toctree-l2"><a class="reference internal" href="04_mac-install.html">4. Mac平台搭建以太坊</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">5. 控制台模拟转账</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="../begin/index.html">以太坊入门基础篇</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../solidity/index.html">智能合约开发篇</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../truffle/index.html">以太坊开发框架Truffle</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../web3js/index.html">Web3.js开发篇</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Web3.js开发篇</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">1. 环境搭建</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#web3-js-html">1.1. web3.js+html</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#node-js">1.2. node.js项目</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="02_account.html">2. 添加账户</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_query.html">3. 添加账户</a></li>
+</ul>
+</li>
 </ul>
 
             
@@ -137,15 +139,15 @@
     
       <li><a href="../index.html">Docs</a> &raquo;</li>
         
-          <li><a href="index.html">以太坊入门基础篇</a> &raquo;</li>
+          <li><a href="index.html">Web3.js开发篇</a> &raquo;</li>
         
-      <li><span class="section-number">5. </span>控制台模拟转账</li>
+      <li><span class="section-number">1. </span>环境搭建</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../_sources/begin/05_transaction.md.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/web3js/01_dev.md.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -159,7 +161,27 @@
            <div itemprop="articleBody">
             
   <div class="section" id="id1">
-<h1><span class="section-number">5. </span>控制台模拟转账<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
+<h1><span class="section-number">1. </span>环境搭建<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
+<p>web3.js 是一个通过RPC 调用 和本地以太坊节点进行通信的js库。web3.js可以与任何暴露了RPC接口的以太坊节点连接。 web3中提供了eth对象 - web3.eth来与以太坊区块链进行交互。
+这里使用web3.js+html进行开发，也可以使用node.js项目进行开发</p>
+<div class="section" id="web3-js-html">
+<h2><span class="section-number">1.1. </span>web3.js+html<a class="headerlink" href="#web3-js-html" title="永久链接至标题">¶</a></h2>
+<p>需要下载web3.js文件
+下载地址：
+https://github.com/cayden/web3-js/tree/master/js</p>
+</div>
+<div class="section" id="node-js">
+<h2><span class="section-number">1.2. </span>node.js项目<a class="headerlink" href="#node-js" title="永久链接至标题">¶</a></h2>
+<p>1、新建一个node.js项目并初始化</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$ mkdir web3test <span class="o">&amp;&amp;</span> <span class="nb">cd</span> web3test
+$ npm init
+</pre></div>
+</div>
+<p>2、导入web3.js</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>npm install web3 --save
+</pre></div>
+</div>
+</div>
 </div>
 
 
@@ -170,10 +192,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../solidity/index.html" class="btn btn-neutral float-right" title="智能合约开发篇" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="02_account.html" class="btn btn-neutral float-right" title="2. 添加账户" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="04_mac-install.html" class="btn btn-neutral float-left" title="4. Mac平台搭建以太坊" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="index.html" class="btn btn-neutral float-left" title="Web3.js开发篇" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

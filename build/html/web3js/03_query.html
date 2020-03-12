@@ -1,0 +1,377 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="zh" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="zh" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>3. 添加账户 &mdash; eth-dev-docs v1.0 文档</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="prev" title="2. 添加账户" href="02_account.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> eth-dev-docs
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../begin/index.html">以太坊入门基础篇</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../solidity/index.html">智能合约开发篇</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../truffle/index.html">以太坊开发框架Truffle</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Web3.js开发篇</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="01_dev.html">1. 环境搭建</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_account.html">2. 添加账户</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">3. 添加账户</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">eth-dev-docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Web3.js开发篇</a> &raquo;</li>
+        
+      <li><span class="section-number">3. </span>添加账户</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/web3js/03_query.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="id1">
+<h1><span class="section-number">3. </span>添加账户<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
+<p>转账涉及发送交易，发送交易使用sendtransaction这个方法。</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span>web3.eth.sendTransaction(transactionObject [, callback])
+</pre></div>
+</div>
+<p>第二个参数是回调函数用来获得发送交易的Hash值。</p>
+<p>第一个参数是一个交易对象，交易对象里面有几个字段：</p>
+<ul class="simple">
+<li><p>from : 就是从哪个账号发送金额</p></li>
+<li><p>to : 发动到到哪个账号</p></li>
+<li><p>value 是发送的金额</p></li>
+<li><p>gas: 设置gas limit</p></li>
+<li><p>gasPrice: 设置gas 价格</p></li>
+</ul>
+<p>如果from没有的话，他就会用当前的默认账号， 如果是转账to和value是必选的两个字段。</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span>//  这里使用Metamask 给的gas Limit 及 gas 价
+var fromAccount = $(&#39;#fromAccount&#39;).val();
+var toAccount = $(&#39;#toAccount&#39;).val();
+var amount = $(&#39;#amount&#39;).val();
+
+// 对输入的数字做一个检查
+if (web3.isAddress(fromAccount) &amp;&amp;
+            web3.isAddress(toAccount) &amp;&amp;
+            amount != null &amp;&amp; amount.length &gt; 0） {
+    var message = {from: fromAccount, to:toAccount, value: web3.toWei(amount, &#39;ether&#39;)};
+
+    web3.eth.sendTransaction(message, (err, res) =&gt; {
+        var output = &quot;&quot;;
+        if (!err) {
+            output += res;
+        } else {
+            output = &quot;Error&quot;;
+        }
+    }
+}
+</pre></div>
+</div>
+<p>具体代码</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&quot;en&quot;</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&quot;UTF-8&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Title<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;js/web3.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;button&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;获取账号&quot;</span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;button&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;创建账号&quot;</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;button&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;解锁账号&quot;</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;button&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;获取余额&quot;</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;button&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;测试合约&quot;</span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;button&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;转账&quot;</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
+        <span class="kd">var</span> <span class="nx">web3</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Web3</span><span class="p">(</span><span class="k">new</span> <span class="nx">Web3</span><span class="p">.</span><span class="nx">providers</span><span class="p">.</span><span class="nx">HttpProvider</span><span class="p">(</span><span class="s2">&quot;http://127.0.0.1:8545&quot;</span><span class="p">));</span>
+        <span class="kd">var</span> <span class="nx">abi</span><span class="o">=</span><span class="p">[</span>
+            <span class="p">{</span>
+                <span class="s2">&quot;constant&quot;</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+                <span class="s2">&quot;inputs&quot;</span><span class="o">:</span> <span class="p">[</span>
+                    <span class="p">{</span>
+                        <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;_msg&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;string&quot;</span>
+                    <span class="p">}</span>
+                <span class="p">],</span>
+                <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;set&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;outputs&quot;</span><span class="o">:</span> <span class="p">[],</span>
+                <span class="s2">&quot;payable&quot;</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+                <span class="s2">&quot;stateMutability&quot;</span><span class="o">:</span> <span class="s2">&quot;nonpayable&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;function&quot;</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+                <span class="s2">&quot;constant&quot;</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+                <span class="s2">&quot;inputs&quot;</span><span class="o">:</span> <span class="p">[],</span>
+                <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;say&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;outputs&quot;</span><span class="o">:</span> <span class="p">[</span>
+                    <span class="p">{</span>
+                        <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;string&quot;</span>
+                    <span class="p">}</span>
+                <span class="p">],</span>
+                <span class="s2">&quot;payable&quot;</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+                <span class="s2">&quot;stateMutability&quot;</span><span class="o">:</span> <span class="s2">&quot;view&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;function&quot;</span>
+            <span class="p">}</span>
+        <span class="p">]</span>
+        <span class="kd">var</span> <span class="nx">addr</span><span class="o">=</span><span class="s2">&quot;0x60823932b688af82c81a082f2292e95f879a0cb0&quot;</span>
+
+        <span class="nb">document</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="s2">&quot;input&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">].</span><span class="nx">onclick</span><span class="o">=</span><span class="kd">function</span><span class="p">(){</span>
+             <span class="c1">//使用web3 的api 去操作节点。jsonrpc</span>
+
+            <span class="nx">web3</span><span class="p">.</span><span class="nx">eth</span><span class="p">.</span><span class="nx">getAccounts</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">,</span><span class="nx">result</span><span class="p">){</span>
+                <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span>
+                <span class="kd">var</span> <span class="nx">res</span><span class="o">=</span><span class="s2">&quot;查询账号信息:&lt;br&gt;&quot;</span><span class="p">;</span>
+                <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="nx">i</span><span class="o">&lt;</span><span class="nx">result</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span><span class="nx">i</span><span class="o">++</span><span class="p">){</span>
+                    <span class="nx">res</span><span class="o">+=</span><span class="s2">&quot;账号&quot;</span><span class="o">+</span><span class="p">(</span><span class="nx">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="s2">&quot;:&quot;</span><span class="o">+</span><span class="nx">result</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span><span class="o">+</span><span class="s2">&quot;&lt;br&gt;&quot;</span><span class="p">;</span>
+                <span class="p">}</span>
+                <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&quot;result&quot;</span><span class="p">).</span><span class="nx">innerHTML</span><span class="o">=</span><span class="nx">res</span><span class="p">;</span>
+            <span class="p">});</span>
+
+        <span class="p">}</span>
+        <span class="nb">document</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="s2">&quot;input&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">].</span><span class="nx">onclick</span><span class="o">=</span><span class="kd">function</span><span class="p">(){</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;www&quot;</span><span class="p">);</span>
+            <span class="nx">web3</span><span class="p">.</span><span class="nx">personal</span><span class="p">.</span><span class="nx">newAccount</span><span class="p">(</span><span class="s2">&quot;123456&quot;</span><span class="p">,</span><span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">,</span><span class="nx">result</span><span class="p">){</span>
+                <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span>
+            <span class="p">});</span>
+        <span class="p">}</span>
+        <span class="nb">document</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="s2">&quot;input&quot;</span><span class="p">)[</span><span class="mi">2</span><span class="p">].</span><span class="nx">onclick</span><span class="o">=</span><span class="kd">function</span><span class="p">(){</span>
+            <span class="nx">web3</span><span class="p">.</span><span class="nx">personal</span><span class="p">.</span><span class="nx">unlockAccount</span><span class="p">(</span><span class="s2">&quot;0x89ed26fe35814f839b8b62e5de09521280247cfd&quot;</span><span class="p">,</span><span class="s2">&quot;123456&quot;</span><span class="p">,</span><span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">,</span><span class="nx">result</span><span class="p">){</span>
+                <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span>
+                <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;解绑成功&quot;</span><span class="p">);</span>
+            <span class="p">});</span>
+        <span class="p">}</span>
+
+        <span class="nb">document</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="s2">&quot;input&quot;</span><span class="p">)[</span><span class="mi">3</span><span class="p">].</span><span class="nx">onclick</span><span class="o">=</span><span class="kd">function</span><span class="p">(){</span>
+            <span class="nx">web3</span><span class="p">.</span><span class="nx">eth</span><span class="p">.</span><span class="nx">getBalance</span><span class="p">(</span><span class="s2">&quot;0xb258e5b1b30215b112881c13f22ab5a47a624b81&quot;</span><span class="p">,</span><span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">,</span><span class="nx">result</span><span class="p">){</span>
+                <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span>
+
+                <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&quot;result&quot;</span><span class="p">).</span><span class="nx">innerHTML</span><span class="o">=</span><span class="s2">&quot;余额：&quot;</span><span class="o">+</span><span class="nx">result</span><span class="p">.</span><span class="nx">c</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+                <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;获取余额成功&quot;</span><span class="p">);</span>
+            <span class="p">});</span>
+        <span class="p">}</span>
+
+        <span class="nb">document</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="s2">&quot;input&quot;</span><span class="p">)[</span><span class="mi">4</span><span class="p">].</span><span class="nx">onclick</span><span class="o">=</span><span class="kd">function</span><span class="p">(){</span>
+            <span class="kd">var</span> <span class="nx">adoption</span> <span class="o">=</span> <span class="nx">web3</span><span class="p">.</span><span class="nx">eth</span><span class="p">.</span><span class="nx">contract</span><span class="p">(</span><span class="nx">abi</span><span class="p">).</span><span class="nx">at</span><span class="p">(</span><span class="nx">addr</span><span class="p">)</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;获取account[0]&quot;</span><span class="o">+</span><span class="nx">web3</span><span class="p">.</span><span class="nx">eth</span><span class="p">.</span><span class="nx">accounts</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+            <span class="nx">web3</span><span class="p">.</span><span class="nx">personal</span><span class="p">.</span><span class="nx">unlockAccount</span><span class="p">(</span><span class="nx">web3</span><span class="p">.</span><span class="nx">eth</span><span class="p">.</span><span class="nx">accounts</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="s2">&quot;123456&quot;</span><span class="p">,</span><span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">,</span><span class="nx">result</span><span class="p">){</span>
+                <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span>
+                <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;解绑成功&quot;</span><span class="p">);</span>
+                <span class="nx">adoption</span><span class="p">.</span><span class="nx">set</span><span class="p">.</span><span class="nx">sendTransaction</span><span class="p">(</span><span class="s2">&quot;I&#39;m here!!!&quot;</span><span class="p">,</span> <span class="p">{</span><span class="nx">from</span><span class="o">:</span><span class="nx">web3</span><span class="p">.</span><span class="nx">eth</span><span class="p">.</span><span class="nx">accounts</span><span class="p">[</span><span class="mi">0</span><span class="p">]})</span>
+
+                <span class="kd">var</span> <span class="nx">str</span><span class="o">=</span> <span class="nx">adoption</span><span class="p">.</span><span class="nx">say</span><span class="p">();</span>
+                <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;获取成功&quot;</span><span class="o">+</span><span class="nx">str</span><span class="p">);</span>
+            <span class="p">});</span>
+
+        <span class="p">}</span>
+
+        <span class="nb">document</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="s2">&quot;input&quot;</span><span class="p">)[</span><span class="mi">5</span><span class="p">].</span><span class="nx">onclick</span><span class="o">=</span><span class="kd">function</span><span class="p">(){</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;oooo&#39;</span><span class="p">);</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;获取account[0]&quot;</span><span class="o">+</span><span class="nx">web3</span><span class="p">.</span><span class="nx">eth</span><span class="p">.</span><span class="nx">accounts</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+            <span class="kd">var</span> <span class="nx">fromAccount</span><span class="o">=</span><span class="s1">&#39;0xb258e5b1b30215b112881c13f22ab5a47a624b81&#39;</span><span class="p">;</span>
+            <span class="kd">var</span> <span class="nx">toAccount</span><span class="o">=</span><span class="s1">&#39;0xf417953e3b736a68cf7c60f89f459a28d25880da&#39;</span><span class="p">;</span>
+            <span class="kd">var</span> <span class="nx">amount</span><span class="o">=</span><span class="mi">2000</span><span class="p">;</span>
+            <span class="kd">var</span> <span class="nx">message</span><span class="o">=</span><span class="p">{</span><span class="nx">from</span><span class="o">:</span><span class="nx">fromAccount</span><span class="p">,</span><span class="nx">to</span><span class="o">:</span><span class="nx">toAccount</span><span class="p">,</span><span class="nx">value</span><span class="o">:</span><span class="nx">web3</span><span class="p">.</span><span class="nx">toWei</span><span class="p">(</span><span class="nx">amount</span><span class="p">,</span><span class="s1">&#39;ether&#39;</span><span class="p">)}</span>
+            <span class="nx">web3</span><span class="p">.</span><span class="nx">personal</span><span class="p">.</span><span class="nx">unlockAccount</span><span class="p">(</span><span class="nx">web3</span><span class="p">.</span><span class="nx">eth</span><span class="p">.</span><span class="nx">accounts</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="s2">&quot;123456&quot;</span><span class="p">,</span><span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">,</span><span class="nx">result</span><span class="p">){</span>
+                <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span>
+                <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;解绑成功&quot;</span><span class="p">);</span>
+                <span class="nx">web3</span><span class="p">.</span><span class="nx">eth</span><span class="p">.</span><span class="nx">sendTransaction</span><span class="p">(</span><span class="nx">message</span><span class="p">,</span><span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">,</span><span class="nx">result</span><span class="p">){</span>
+                    <span class="kd">var</span> <span class="nx">output</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">;</span>
+                    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nx">error</span><span class="p">){</span>
+                        <span class="nx">output</span><span class="o">+=</span><span class="nx">result</span><span class="p">;</span>
+                    <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+                        <span class="nx">output</span><span class="o">=</span><span class="s2">&quot;Error&quot;</span><span class="p">;</span>
+                    <span class="p">}</span>
+                    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">output</span><span class="p">);</span>
+                <span class="p">})</span>
+            <span class="p">});</span>
+
+        <span class="p">}</span>
+
+
+<span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;result&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<p>执行成功后，返回交易地址</p>
+<div align=center><p><img alt="Message.sol" src="../_images/5e1419af30f1a.png" /></p>
+</div></div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="02_account.html" class="btn btn-neutral float-left" title="2. 添加账户" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, cayden
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

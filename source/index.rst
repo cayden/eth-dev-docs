@@ -19,3 +19,6 @@
       begin/index
       solidity/index
       truffle/index
+      web3js/index
+      web3j/index
+      explorer/index

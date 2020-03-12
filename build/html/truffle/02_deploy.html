@@ -1,0 +1,353 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="zh" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="zh" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>2. Truffle安装部署和测试 &mdash; eth-dev-docs v1.0 文档</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="prev" title="1. 开发框架Truffle介绍" href="01_truffle.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> eth-dev-docs
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../begin/index.html">以太坊入门基础篇</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../solidity/index.html">智能合约开发篇</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">以太坊开发框架Truffle</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="01_truffle.html">1. 开发框架Truffle介绍</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">2. Truffle安装部署和测试</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">2.1. truffle环境安装</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">2.2. 初始化</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">2.3. 新建合约文件</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">2.4. 增加合约部署文件</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">2.5. 编译合约</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">2.6. 部署合约到区块链上</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">2.7. 合约调用</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">eth-dev-docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">以太坊开发框架Truffle</a> &raquo;</li>
+        
+      <li><span class="section-number">2. </span>Truffle安装部署和测试</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/truffle/02_deploy.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="truffle">
+<h1><span class="section-number">2. </span>Truffle安装部署和测试<a class="headerlink" href="#truffle" title="永久链接至标题">¶</a></h1>
+<div class="section" id="id1">
+<h2><span class="section-number">2.1. </span>truffle环境安装<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h2>
+<p>针对truffle 环境安装可以参考此前介绍
+<code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">npm</span> <span class="pre">install</span> <span class="pre">-g</span> <span class="pre">truffle</span></code></p>
+</div>
+<div class="section" id="id2">
+<h2><span class="section-number">2.2. </span>初始化<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
+<p>打开终端创建一个目录</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>mkdir <span class="nb">test</span>
+<span class="nb">cd</span> <span class="nb">test</span>
+truffle init
+</pre></div>
+</div>
+<p>会生成文件</p>
+<div align=center><p><img alt="初始化" src="../_images/20180725143803406.png" /></p>
+</div></div>
+<div class="section" id="id3">
+<h2><span class="section-number">2.3. </span>新建合约文件<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
+<p>然后可以用vscode打开test目录
+新建一个合约</p>
+<div align=center><p><img alt="新建合约文件" src="../_images/20180725144102151.png" /></p>
+</div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pragma</span> <span class="n">solidity</span> <span class="o">^</span><span class="mf">0.4</span><span class="o">.</span><span class="mi">23</span><span class="p">;</span>
+
+<span class="n">contract</span> <span class="n">Say</span> <span class="p">{</span>
+    <span class="n">string</span> <span class="n">private</span> <span class="n">content</span><span class="p">;</span>
+    <span class="n">function</span> <span class="nb">set</span><span class="p">(</span><span class="n">string</span> <span class="n">_msg</span><span class="p">)</span> <span class="n">public</span> <span class="p">{</span>
+        <span class="n">content</span><span class="o">=</span><span class="n">_msg</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">function</span> <span class="n">say</span><span class="p">()</span> <span class="n">constant</span> <span class="n">public</span> <span class="n">returns</span><span class="p">(</span><span class="n">string</span> <span class="p">){</span>
+        <span class="k">return</span> <span class="n">content</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id4">
+<h2><span class="section-number">2.4. </span>增加合约部署文件<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h2>
+<p>在目录migrations新建2_deploy_contracts.js</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">var</span> <span class="n">Say</span> <span class="o">=</span> <span class="n">artifacts</span><span class="o">.</span><span class="n">require</span><span class="p">(</span><span class="s2">&quot;./Say.sol&quot;</span><span class="p">);</span>
+<span class="n">module</span><span class="o">.</span><span class="n">exports</span> <span class="o">=</span> <span class="n">function</span><span class="p">(</span><span class="n">deployer</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">deployer</span><span class="o">.</span><span class="n">deploy</span><span class="p">(</span><span class="n">Say</span><span class="p">);</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id5">
+<h2><span class="section-number">2.5. </span>编译合约<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h2>
+<p>执行命令</p>
+<blockquote>
+<div><p>truffle compile</p>
+</div></blockquote>
+</div>
+<div class="section" id="id6">
+<h2><span class="section-number">2.6. </span>部署合约到区块链上<a class="headerlink" href="#id6" title="永久链接至标题">¶</a></h2>
+<p>修改目录下的文件truffle.js
+如下(host和port要根据自己的配置来定)</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+module.exports = {
+  // See &lt;http://truffleframework.com/docs/advanced/configuration&gt;
+  // to customize your Truffle configuration!
+  networks:{
+    development:{
+      host:&quot;localhost&quot;,
+      port:8545,
+      network_id:&quot;*&quot;,
+      gas:3000000
+    }
+  }
+};
+</pre></div>
+</div>
+<p>在部署之前先解锁账号 ，并启动挖矿</p>
+<blockquote>
+<div><p>personal.unlockAccount(user1)</p>
+</div></blockquote>
+<blockquote>
+<div><p>miner.start()</p>
+</div></blockquote>
+<p>然后执行truffle migrate 部署合约</p>
+<div align=center><p><img alt="部署合约" src="../_images/20180725150506649.png" /></p>
+</div><p>这样合约就部署成功了，但是怎么调用呢？下面会讲到</p>
+</div>
+<div class="section" id="id7">
+<h2><span class="section-number">2.7. </span>合约调用<a class="headerlink" href="#id7" title="永久链接至标题">¶</a></h2>
+<p>配置参数参数位于truffle中的build/contracts目录下的Say.json文件中
+可以打开文件查找到
+配置abi参数</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span> <span class="n">var</span> <span class="n">abi</span><span class="o">=</span><span class="p">[</span>
+            <span class="p">{</span>
+                <span class="s2">&quot;constant&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+                <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">[</span>
+                    <span class="p">{</span>
+                        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;_msg&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;string&quot;</span>
+                    <span class="p">}</span>
+                <span class="p">],</span>
+                <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;set&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;outputs&quot;</span><span class="p">:</span> <span class="p">[],</span>
+                <span class="s2">&quot;payable&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+                <span class="s2">&quot;stateMutability&quot;</span><span class="p">:</span> <span class="s2">&quot;nonpayable&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;function&quot;</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+                <span class="s2">&quot;constant&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+                <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">[],</span>
+                <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;say&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;outputs&quot;</span><span class="p">:</span> <span class="p">[</span>
+                    <span class="p">{</span>
+                        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;string&quot;</span>
+                    <span class="p">}</span>
+                <span class="p">],</span>
+                <span class="s2">&quot;payable&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+                <span class="s2">&quot;stateMutability&quot;</span><span class="p">:</span> <span class="s2">&quot;view&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;function&quot;</span>
+            <span class="p">}</span>
+        <span class="p">]</span>
+</pre></div>
+</div>
+<p>配置addr参数</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>        <span class="n">var</span> <span class="n">addr</span><span class="o">=</span><span class="s2">&quot;0x60823932b688af82c81a082f2292e95f879a0cb0&quot;</span>
+</pre></div>
+</div>
+<p>然后进行调用即可</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">var</span> <span class="n">adoption</span> <span class="o">=</span> <span class="n">web3</span><span class="o">.</span><span class="n">eth</span><span class="o">.</span><span class="n">contract</span><span class="p">(</span><span class="n">abi</span><span class="p">)</span><span class="o">.</span><span class="n">at</span><span class="p">(</span><span class="n">addr</span><span class="p">)</span>
+<span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s2">&quot;获取account[0]&quot;</span><span class="o">+</span><span class="n">web3</span><span class="o">.</span><span class="n">eth</span><span class="o">.</span><span class="n">accounts</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+<span class="n">adoption</span><span class="o">.</span><span class="n">set</span><span class="o">.</span><span class="n">sendTransaction</span><span class="p">(</span><span class="s2">&quot;I&#39;m here!!!&quot;</span><span class="p">,</span> <span class="p">{</span><span class="n">from</span><span class="p">:</span><span class="n">web3</span><span class="o">.</span><span class="n">eth</span><span class="o">.</span><span class="n">accounts</span><span class="p">[</span><span class="mi">0</span><span class="p">]})</span>
+<span class="n">var</span> <span class="nb">str</span><span class="o">=</span> <span class="n">adoption</span><span class="o">.</span><span class="n">say</span><span class="p">();</span>
+<span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s2">&quot;获取成功&quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>打印的日志：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">获取成功I</span><span class="s1">&#39;m here!!!</span>
+</pre></div>
+</div>
+<p>到此调用智能合约就ok了！！！</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="01_truffle.html" class="btn btn-neutral float-left" title="1. 开发框架Truffle介绍" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, cayden
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

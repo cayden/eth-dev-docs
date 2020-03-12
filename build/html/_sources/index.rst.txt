@@ -18,3 +18,4 @@
 
       begin/index
       solidity/index
+      truffle/index

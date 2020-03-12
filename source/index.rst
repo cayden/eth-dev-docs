@@ -8,7 +8,7 @@ Welcome to eth-dev-docs's documentation!
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
+   :glob: 
 
 
 

@@ -30,8 +30,8 @@ release = 'v1.0'
 
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
-# ones.
-extensions = ['sphinx_markdown_tables'
+# ones.sphinx_markdown_tables
+extensions = [
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -48,6 +48,8 @@ language = 'zh'
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path.
 exclude_patterns = []
+# The master toctree document.
+master_doc = 'index'
 
 source_parsers = {
     '.md': CommonMarkParser,

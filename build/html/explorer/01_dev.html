@@ -1,0 +1,269 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="zh" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="zh" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>1. 搭建以太坊区块链浏览器 &mdash; eth-dev-docs v1.0 文档</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="prev" title="搭建以太坊区块链浏览器" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> eth-dev-docs
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../begin/index.html">以太坊入门基础篇</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../solidity/index.html">智能合约开发篇</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../truffle/index.html">以太坊开发框架Truffle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web3js/index.html">Web3.js开发篇</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web3j/index.html">Web3j开发篇</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">搭建以太坊区块链浏览器</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">1. 搭建以太坊区块链浏览器</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id2">1.1. 下载区块链浏览器代码</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bower">1.2. 下载bower工具</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">1.3. 启动以太坊节点</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">1.4. 启动区块链浏览器</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">1.5. 访问区块链浏览器</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">eth-dev-docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">搭建以太坊区块链浏览器</a> &raquo;</li>
+        
+      <li><span class="section-number">1. </span>搭建以太坊区块链浏览器</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/explorer/01_dev.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="id1">
+<h1><span class="section-number">1. </span>搭建以太坊区块链浏览器<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
+<p>经过前面文章介绍，已经搭建以太坊的区块链环境，但是没有一个界面能查看到区块链的块数等信息，不是很直观，本篇搭建以太坊区块链浏览器。</p>
+<div class="section" id="id2">
+<h2><span class="section-number">1.1. </span>下载区块链浏览器代码<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>cuiran@cuiran:~/ethereum$     git clone https://github.com/etherparty/explorer
+Cloning into &#39;explorer&#39;...
+remote: Counting objects: 269, done.
+remote: Total 269 (delta 0), reused 0 (delta 0), pack-reused 269
+Receiving objects: 100% (269/269), 58.84 KiB | 43.00 KiB/s, done.
+Resolving deltas: 100% (139/139), done.
+Checking connectivity... done.
+</pre></div>
+</div>
+<p>默认配置的url是http://localhost:8545 如果rpc端口有改动需要手动去更改一下目录中的package.json文件</p>
+</div>
+<div class="section" id="bower">
+<h2><span class="section-number">1.2. </span>下载bower工具<a class="headerlink" href="#bower" title="永久链接至标题">¶</a></h2>
+<p>执行如下命令即可</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">npm</span> <span class="n">install</span> <span class="o">-</span><span class="n">g</span> <span class="n">bower</span> <span class="o">-</span><span class="n">y</span>
+<span class="n">bower</span> <span class="n">init</span><span class="p">(</span><span class="n">有提示可以不用管</span><span class="p">)</span>
+<span class="n">bower</span> <span class="n">install</span> <span class="o">--</span><span class="n">allow</span><span class="o">-</span><span class="n">root</span>
+<span class="n">bower</span> <span class="n">install</span> <span class="n">angular</span> <span class="o">--</span><span class="n">save</span><span class="o">-</span><span class="n">dev</span> <span class="o">--</span><span class="n">allow</span><span class="o">-</span><span class="n">root</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id3">
+<h2><span class="section-number">1.3. </span>启动以太坊节点<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
+<p>执行命令</p>
+<blockquote>
+<div><p>geth --datadir . --networkid 4224 --rpc --rpcport 8545 --port 30303 --rpccorsdomain &quot;*&quot; -rpcapi eth,web3,personal,net,db console 2&gt; log.txt</p>
+</div></blockquote>
+<p>如图所示：</p>
+<div align=center><p><img alt="启动以太坊节点" src="../_images/20180724220834891.jfif" /></p>
+</div></div>
+<div class="section" id="id4">
+<h2><span class="section-number">1.4. </span>启动区块链浏览器<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h2>
+<p>进入explorer目录执行</p>
+<blockquote>
+<div><p>npm start</p>
+</div></blockquote>
+<p>如图所示:</p>
+<div align=center><p><img alt="启动区块链浏览器" src="../_images/20180724221130614.jfif" /></p>
+</div></div>
+<div class="section" id="id5">
+<h2><span class="section-number">1.5. </span>访问区块链浏览器<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h2>
+<p>访问地址:http://localhost:8000/
+这个时候会加载很慢，是因为js中使用了ajax.googleapis.com
+<strong>只要把所有JS中的ajax.googleapis.com替换成ajax.lug.ustc.edu.cn即可正常使用。</strong>
+下面就是访问的效果图</p>
+<div align=center><p><img alt="访问的效果图" src="../_images/20180724221424316.jfif" /></p>
+</div><p>然后可以做一笔交易 ，可以进行查询
+如图所示：</p>
+<div align=center><p><img alt="访问的效果图" src="../_images/20180724221514151.jfif" /></p>
+</div></div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="index.html" class="btn btn-neutral float-left" title="搭建以太坊区块链浏览器" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, cayden
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

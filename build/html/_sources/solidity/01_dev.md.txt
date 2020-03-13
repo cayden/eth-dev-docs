@@ -20,4 +20,8 @@ remix-ide
 就会启动一个8080 的端口，打开浏览器，输入
 http://localhost:8080    就可以打开remix编辑器了。
 
-![](http://doc.cayden.cn/Public/Uploads/2020-01-06/5e1318d2350ee.png)
+
+<div align=center>
+
+![Message.sol](../images/5e1318d2350ee.png)
+</div>

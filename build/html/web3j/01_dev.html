@@ -1,0 +1,283 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="zh" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="zh" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>1. Remix开发智能合约 &mdash; eth-dev-docs v1.0 文档</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="2. 添加账户" href="02_account.html" />
+    <link rel="prev" title="Web3j开发篇" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> eth-dev-docs
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../begin/index.html">以太坊入门基础篇</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../solidity/index.html">智能合约开发篇</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../truffle/index.html">以太坊开发框架Truffle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web3js/index.html">Web3.js开发篇</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Web3j开发篇</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">1. Remix开发智能合约</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#web3j">1.1. web3j简介</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id1">1.2. 新建项目</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pom-xml">1.3. 配置pom.xml</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#parityclient">1.4. 新建ParityClient</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="02_account.html">2. 添加账户</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_query.html">3. 转账和余额查询功能实现</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_voting.html">4. 投票项目实战</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../explorer/index.html">搭建以太坊区块链浏览器</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">eth-dev-docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Web3j开发篇</a> &raquo;</li>
+        
+      <li><span class="section-number">1. </span>Remix开发智能合约</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/web3j/01_dev.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="remix">
+<h1><span class="section-number">1. </span>Remix开发智能合约<a class="headerlink" href="#remix" title="永久链接至标题">¶</a></h1>
+<div class="section" id="web3j">
+<h2><span class="section-number">1.1. </span>web3j简介<a class="headerlink" href="#web3j" title="永久链接至标题">¶</a></h2>
+<p>web3j是一个轻量级、高度模块化、响应式、类型安全的Java和Android类库提供丰富API，用于处理以太坊智能合约及与以太坊网络上的客户端(节点)进行集成。</p>
+<p>可以通过它进行以太坊区块链的开发，而无需为你的应用平台编写集成代码。</p>
+</div>
+<div class="section" id="id1">
+<h2><span class="section-number">1.2. </span>新建项目<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h2>
+<p>新建一个maven项目ethsample</p>
+<div align=center><p><img alt="项目ethsample" src="../_images/5e14867844785.png" /></p>
+</div></div>
+<div class="section" id="pom-xml">
+<h2><span class="section-number">1.3. </span>配置pom.xml<a class="headerlink" href="#pom-xml" title="永久链接至标题">¶</a></h2>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="nt">&lt;project</span> <span class="na">xmlns=</span><span class="s">&quot;http://maven.apache.org/POM/4.0.0&quot;</span>
+         <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+         <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;modelVersion&gt;</span>4.0.0<span class="nt">&lt;/modelVersion&gt;</span>
+
+    <span class="nt">&lt;groupId&gt;</span>com.cayden.ethereum<span class="nt">&lt;/groupId&gt;</span>
+    <span class="nt">&lt;artifactId&gt;</span>ethsample<span class="nt">&lt;/artifactId&gt;</span>
+    <span class="nt">&lt;version&gt;</span>1.0-SNAPSHOT<span class="nt">&lt;/version&gt;</span>
+    <span class="nt">&lt;dependencies&gt;</span>
+        <span class="nt">&lt;dependency&gt;</span>
+            <span class="nt">&lt;groupId&gt;</span>org.web3j<span class="nt">&lt;/groupId&gt;</span>
+            <span class="nt">&lt;artifactId&gt;</span>core<span class="nt">&lt;/artifactId&gt;</span>
+            <span class="nt">&lt;version&gt;</span>2.2.1<span class="nt">&lt;/version&gt;</span>
+        <span class="nt">&lt;/dependency&gt;</span>
+        <span class="nt">&lt;dependency&gt;</span>
+            <span class="nt">&lt;groupId&gt;</span>org.slf4j<span class="nt">&lt;/groupId&gt;</span>
+            <span class="nt">&lt;artifactId&gt;</span>slf4j-log4j12<span class="nt">&lt;/artifactId&gt;</span>
+            <span class="nt">&lt;version&gt;</span>1.7.2<span class="nt">&lt;/version&gt;</span>
+        <span class="nt">&lt;/dependency&gt;</span>
+    <span class="nt">&lt;/dependencies&gt;</span>
+<span class="nt">&lt;/project&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="parityclient">
+<h2><span class="section-number">1.4. </span>新建ParityClient<a class="headerlink" href="#parityclient" title="永久链接至标题">¶</a></h2>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kn">package</span> <span class="nn">com.cayden.ethereum.client</span><span class="p">;</span>
+
+<span class="kn">import</span> <span class="nn">org.web3j.protocol.http.HttpService</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">org.web3j.protocol.parity.Parity</span><span class="p">;</span>
+
+<span class="cm">/**</span>
+<span class="cm"> * Created by cuiran on 18/7/6.</span>
+<span class="cm"> */</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">ParityClient</span> <span class="p">{</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="n">String</span> <span class="n">ip</span> <span class="o">=</span> <span class="s">&quot;http://127.0.0.1:8545/&quot;</span><span class="p">;</span>
+    <span class="kd">private</span> <span class="nf">ParityClient</span><span class="p">(){}</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">class</span> <span class="nc">ClientHolder</span><span class="p">{</span>
+        <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">Parity</span> <span class="n">parity</span> <span class="o">=</span> <span class="n">Parity</span><span class="p">.</span><span class="na">build</span><span class="p">(</span><span class="k">new</span> <span class="n">HttpService</span><span class="p">(</span><span class="n">ip</span><span class="p">));</span>
+    <span class="p">}</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">Parity</span> <span class="nf">getParity</span><span class="p">(){</span>
+        <span class="k">return</span> <span class="n">ClientHolder</span><span class="p">.</span><span class="na">parity</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>如图所示</p>
+<div align=center><p><img alt="如图所示" src="../_images/5e1487275a0d6.png" /></p>
+</div></div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="02_account.html" class="btn btn-neutral float-right" title="2. 添加账户" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral float-left" title="Web3j开发篇" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, cayden
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

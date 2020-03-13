@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>3. 添加账户 &mdash; eth-dev-docs v1.0 文档</title>
+  <title>3. 转账和余额查询功能实现 &mdash; eth-dev-docs v1.0 文档</title>
   
 
   
@@ -35,6 +35,7 @@
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="Web3j开发篇" href="../web3j/index.html" />
     <link rel="prev" title="2. 添加账户" href="02_account.html" /> 
 </head>
 
@@ -86,9 +87,11 @@
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Web3.js开发篇</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="01_dev.html">1. 环境搭建</a></li>
 <li class="toctree-l2"><a class="reference internal" href="02_account.html">2. 添加账户</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">3. 添加账户</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">3. 转账和余额查询功能实现</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../web3j/index.html">Web3j开发篇</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../explorer/index.html">搭建以太坊区块链浏览器</a></li>
 </ul>
 
             
@@ -136,7 +139,7 @@
         
           <li><a href="index.html">Web3.js开发篇</a> &raquo;</li>
         
-      <li><span class="section-number">3. </span>添加账户</li>
+      <li><span class="section-number">3. </span>转账和余额查询功能实现</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -156,7 +159,7 @@
            <div itemprop="articleBody">
             
   <div class="section" id="id1">
-<h1><span class="section-number">3. </span>添加账户<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
+<h1><span class="section-number">3. </span>转账和余额查询功能实现<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
 <p>转账涉及发送交易，发送交易使用sendtransaction这个方法。</p>
 <div class="highlight-html notranslate"><div class="highlight"><pre><span></span>web3.eth.sendTransaction(transactionObject [, callback])
 </pre></div>
@@ -334,6 +337,8 @@ if (web3.isAddress(fromAccount) &amp;&amp;
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../web3j/index.html" class="btn btn-neutral float-right" title="Web3j开发篇" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="02_account.html" class="btn btn-neutral float-left" title="2. 添加账户" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

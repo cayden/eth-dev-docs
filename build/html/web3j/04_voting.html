@@ -1,0 +1,321 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="zh" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="zh" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>4. 投票项目实战 &mdash; eth-dev-docs v1.0 文档</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="搭建以太坊区块链浏览器" href="../explorer/index.html" />
+    <link rel="prev" title="3. 转账和余额查询功能实现" href="03_query.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> eth-dev-docs
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../begin/index.html">以太坊入门基础篇</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../solidity/index.html">智能合约开发篇</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../truffle/index.html">以太坊开发框架Truffle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web3js/index.html">Web3.js开发篇</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Web3j开发篇</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="01_dev.html">1. Remix开发智能合约</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_account.html">2. 添加账户</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_query.html">3. 转账和余额查询功能实现</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">4. 投票项目实战</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id2">4.1. 投票智能合约编写</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#solc">4.2. solc命令的使用</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#web3j">4.3. web3j的命令行工具打包</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">4.4. 异常汇总</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../explorer/index.html">搭建以太坊区块链浏览器</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">eth-dev-docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Web3j开发篇</a> &raquo;</li>
+        
+      <li><span class="section-number">4. </span>投票项目实战</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/web3j/04_voting.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="id1">
+<h1><span class="section-number">4. </span>投票项目实战<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
+<div class="section" id="id2">
+<h2><span class="section-number">4.1. </span>投票智能合约编写<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
+<div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="nx">pragma</span> <span class="nx">solidity</span> <span class="o">&gt;=</span><span class="mf">0.4.22</span> <span class="p">&lt;</span><span class="mf">0.6.2</span><span class="p">;</span>
+
+<span class="nx">contract</span> <span class="nx">Voting</span> <span class="p">{</span>
+
+    <span class="nx">mapping</span> <span class="p">(</span><span class="nx">bytes32</span><span class="p">=&gt;</span><span class="kt">uint8</span><span class="p">)</span> <span class="nx">public</span> <span class="nx">votesReceived</span><span class="p">;</span>
+
+    <span class="c1">//存储候选人名字的数组</span>
+    <span class="nx">bytes32</span> <span class="p">[]</span> <span class="nx">public</span> <span class="nx">candidateList</span><span class="p">;</span>
+
+    <span class="c1">//构造函数 初始化候选人名单</span>
+    <span class="nx">constructor</span> <span class="p">(</span><span class="nx">bytes32</span><span class="p">[]</span> <span class="nx">memory</span> <span class="nx">candidateNames</span><span class="p">)</span> <span class="nx">public</span><span class="p">{</span>
+        <span class="nx">candidateList</span><span class="p">=</span><span class="nx">candidateNames</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="c1">//查询某个候选人的总票数</span>
+    <span class="nx">function</span> <span class="nx">totalVotesFor</span><span class="p">(</span><span class="nx">bytes32</span> <span class="nx">candidate</span><span class="p">)</span> <span class="nx">public</span> <span class="nx">view</span> <span class="nx">returns</span><span class="p">(</span><span class="kt">uint8</span><span class="p">){</span>
+
+        <span class="nx">require</span><span class="p">(</span><span class="nx">validCandidate</span><span class="p">(</span><span class="nx">candidate</span><span class="p">)</span> <span class="o">==</span> <span class="kc">true</span><span class="p">);</span>
+
+        <span class="k">return</span> <span class="nx">votesReceived</span><span class="p">[</span><span class="nx">candidate</span><span class="p">];</span>
+    <span class="p">}</span>
+    <span class="c1">//为某个候选人投票</span>
+    <span class="nx">function</span> <span class="nx">voteForCandidate</span><span class="p">(</span><span class="nx">bytes32</span> <span class="nx">candidate</span><span class="p">)</span> <span class="nx">public</span><span class="p">{</span>
+        <span class="nx">assert</span><span class="p">(</span><span class="nx">validCandidate</span><span class="p">(</span><span class="nx">candidate</span><span class="p">)</span><span class="o">==</span><span class="kc">true</span><span class="p">);</span>
+        <span class="nx">votesReceived</span><span class="p">[</span><span class="nx">candidate</span><span class="p">]</span><span class="o">+=</span><span class="mi">1</span><span class="p">;</span>
+
+    <span class="p">}</span>
+
+    <span class="c1">// 检索投票的姓名是不是候选人的名字</span>
+    <span class="nx">function</span> <span class="nx">validCandidate</span><span class="p">(</span><span class="nx">bytes32</span> <span class="nx">candidate</span><span class="p">)</span> <span class="nx">public</span> <span class="nx">view</span> <span class="nx">returns</span> <span class="p">(</span><span class="kt">bool</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">uint</span> <span class="nx">i</span> <span class="p">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="p">&lt;</span> <span class="nx">candidateList</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nx">candidateList</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">==</span> <span class="nx">candidate</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="solc">
+<h2><span class="section-number">4.2. </span>solc命令的使用<a class="headerlink" href="#solc" title="永久链接至标题">¶</a></h2>
+<p>1、首先使用该命令需要安装solidity编译工具solc</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>npm install -g solc
+</pre></div>
+</div>
+<div align=center><p><img alt="安装solc" src="../_images/5e243602c4dda.png" /></p>
+</div><p>2、solc编译命令：</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>solcjs &lt;Solidity文件地址&gt;.sol --bin --abi --optimize -o &lt;输出文件夹路径&gt;/
+</pre></div>
+</div>
+<p>编译如图所示：</p>
+<div align=center><p><img alt="编译如图所示" src="../_images/5e24399a2c84f.png" /></p>
+</div></div>
+<div class="section" id="web3j">
+<h2><span class="section-number">4.3. </span>web3j的命令行工具打包<a class="headerlink" href="#web3j" title="永久链接至标题">¶</a></h2>
+<p>1、首先安装web3j 命令工具</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>curl -L https://get.web3j.io <span class="p">|</span> sh
+</pre></div>
+</div>
+<p>2、如何使用，查看帮助</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>Usage: solidity generate <span class="o">[</span>-hV<span class="o">]</span> <span class="o">[</span>-jt<span class="o">]</span> <span class="o">[</span>-pt<span class="o">]</span> <span class="o">[</span>-st<span class="o">]</span> -a<span class="o">=</span>&lt;abiFile&gt;
+                         <span class="o">[</span>-al<span class="o">=</span>&lt;addressLength&gt;<span class="o">]</span> <span class="o">[</span>-b<span class="o">=</span>&lt;binFile&gt;<span class="o">]</span>
+                         <span class="o">[</span>-c<span class="o">=</span>&lt;contractName&gt;<span class="o">]</span> -o<span class="o">=</span>&lt;destinationFileDir&gt;
+                         -p<span class="o">=</span>&lt;packageName&gt;
+  -a, --abiFile<span class="o">=</span>&lt;abiFile&gt;    abi file with contract definition.
+  -b, --binFile<span class="o">=</span>&lt;binFile&gt;    bin file with contract compiled code in order to
+                               generate deploy methods.
+  -c, --contractName<span class="o">=</span>&lt;contractName&gt;
+                             contract name <span class="o">(</span>defaults to ABI file name<span class="o">)</span>.
+  -o, --outputDir<span class="o">=</span>&lt;destinationFileDir&gt;
+                             destination base directory.
+  -p, --package<span class="o">=</span>&lt;packageName&gt;
+                             base package name.
+      -al, --addressLength<span class="o">=</span>&lt;addressLength&gt;
+                             address length in bytes <span class="o">(</span>defaults to <span class="m">20</span><span class="o">)</span>.
+      -jt, --javaTypes       use native Java types.
+                               Default: <span class="nb">true</span>
+      -st, --solidityTypes   use solidity types.
+      -pt, --primitiveTypes  use Java primitive types.
+  -h, --help                 Show this <span class="nb">help</span> message and exit.
+  -V, --version              Print version information and exit.
+</pre></div>
+</div>
+<p>3、开始打包代码</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span> web3j solidity generate -b voting/Voting_sol_Voting.bin -a voting/Voting_sol_Voting.abi -c Voting -o java -p com.cayden.ethereum.contract
+</pre></div>
+</div>
+<p>生成对应的java类</p>
+<div align=center><p><img alt="生成对应的java类" src="../_images/5e2461342ae52.png" /></p>
+</div></div>
+<div class="section" id="id3">
+<h2><span class="section-number">4.4. </span>异常汇总<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
+<ol class="simple">
+<li><p>java.lang.RuntimeException: java.lang.RuntimeException: Error processing transaction request: insufficient funds for gas * price + value
+这个是以太坊手续费不足异常（insufficient funds）</p></li>
+</ol>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../explorer/index.html" class="btn btn-neutral float-right" title="搭建以太坊区块链浏览器" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="03_query.html" class="btn btn-neutral float-left" title="3. 转账和余额查询功能实现" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, cayden
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

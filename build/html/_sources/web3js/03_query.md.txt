@@ -1,5 +1,5 @@
-添加账户
-==================
+转账和余额查询功能实现
+======================
 转账涉及发送交易，发送交易使用sendtransaction这个方法。
 ```html
 web3.eth.sendTransaction(transactionObject [, callback])

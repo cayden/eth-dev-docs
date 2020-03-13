@@ -12,7 +12,9 @@
 
 <div align=center>
 
-![微信](../images/wx_pay.png)
+![](../images/wx_pay.png)
+
+微信
 </div>
 
 
@@ -23,5 +25,7 @@
 
 <div align=center>
 
-![支付宝](../images/ali_pay.png)
+![](../images/ali_pay.png)
+
+支付宝
 </div>

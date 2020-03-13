@@ -22,3 +22,5 @@
       web3js/index
       web3j/index
       explorer/index
+      chat/index
+      donate/index

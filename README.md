@@ -1,5 +1,7 @@
 # 以太坊DApp开发实战
 
+文档详见 [以太坊DApp开发实战](https://eth-dev-docs.readthedocs.io/en/latest/)
+
 ### 全书目录：
 
 第一章、以太坊入门基础篇：
